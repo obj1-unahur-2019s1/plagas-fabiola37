@@ -11,7 +11,10 @@ class Huerta{
 	var property capacidadDeProduccion = 0
 	
 	method esBueno(){ return capacidadDeProduccion > configuracionHuerta.nivelActual()}
-	method ataque(plaga){ capacidadDeProduccion -= plaga.nivelDeDanio()} 
+	method ataque(plaga){ if(plaga.transmicionDeEnfermedades()){
+								capacidadDeProduccion -= (plaga.nivelDeDanio() - 10) }
+							else capacidadDeProduccion -= (0.10 * plaga.nivelDeDanio())
+	}
 }
 object configuracionHuerta {
 	
@@ -21,11 +24,14 @@ class Mascota {
 	var property nivelDeSalud = 250
 	
 	method esBueno(){return nivelDeSalud > 250}
+	method ataque(plaga){ if(plaga.transmicionDeEnfermedades()){
+								nivelDeSalud -= plaga.nivelDeDanio()}
+	} 
 }
 class Barrios {
 	var property elementos = []
 	
-	method agrgarElemento(elemento){elementos.add(elemento)}
+	method agregarElemento(elemento){elementos.add(elemento)}
 	method quitarElemento(elemento){elementos.remove(elemento)}
 	method esCopado(){return elementos.filter({ elemento => elemento.esBueno()})}
 	method noEsCopado(){return elementos.filter({ elemento => not elemento.esBueno()})}

@@ -1,13 +1,13 @@
 import elementos.*
+import plagas.*
 
-test "barrios" {
+test "barrio es copado" {
 	
 	var hogar1 = new Hogar(nivelDeMugre =20, confortQueOfrece = 50)
 	var huerta1 = new Huerta(capacidadDeProduccion = 1000)
 	
 	var morris = new Barrios()
-	morris.agregarElemento([hogar1, huerta1])
-	morris.agregarElemento(new Hogar(nivelDeMugre = 500, confortQueOfrece = 30))
-	
+	morris.agregarElemento(hogar1)
+	morris.agregarElemento(huerta1)
 	assert.equals(true,morris.copadoONo())
 }
